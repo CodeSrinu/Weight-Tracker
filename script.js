@@ -32,7 +32,7 @@ function addWeightsData(dateKey){
 
     let weightDataContainer = document.createElement('li');
     weightDataContainer.id = dateKey;
-    weightDataContainer.classList.add("weight-data-item", "m-2", "d-flex", "mt-2");
+    weightDataContainer.classList.add("weight-data-item", "m-2", "d-flex", "mt-2", "pl-0");
     weightsAndDataContainer.appendChild(weightDataContainer);
 
     let dataContainer = document.createElement('div');
