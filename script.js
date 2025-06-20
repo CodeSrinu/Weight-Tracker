@@ -11,12 +11,11 @@ let strigifiedWeightsData = "";
 let weightsData = {};
 
 
-if(localStorage.getItem("weightsData") === "null"){
+if(localStorage.getItem("weightsData") === "null" || localStorage.getItem("weightsData") === null){
     weightsData = {};
     localStorage.setItem("weightsData", null);
 }
 else{
-    console.log(localStorage.getItem("weightsData"));
     weightsData = JSON.parse(localStorage.getItem("weightsData"));
     for(let i of Object.keys(weightsData)){ 
         addWeightsData(i);
