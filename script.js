@@ -73,7 +73,7 @@ function addWeightsData(dateKey){
 
 
 function saveWeight(){
-    if(weightInputEl.value !== ""){
+    
         let todayDate = new Date().toLocaleDateString();
         weightsData[todayDate] = weightInputEl.value;
         saveWeightsDataToStorage();
@@ -84,11 +84,6 @@ function saveWeight(){
         calculateWeightLoss();
         weightInputEl.value = "";
         errorMsgEl.textContent = "";
-    }
-    else{
-        errorMsgEl.textContent = "Please enter Weight!"
-
-    }
 }
 
 
@@ -106,8 +101,15 @@ closeIconEl.addEventListener('click', addOrRemoveWeightPopUp);
 
 formEl.addEventListener('submit', function(event){
     event.preventDefault();
-    saveWeight();
-    addOrRemoveWeightPopUp();
+    if(weightInputEl.value !== ""){
+        saveWeight();
+        addOrRemoveWeightPopUp();
+        errorMsgEl.textContent = "";
+    }
+    else{
+        errorMsgEl.textContent = "Please enter Weight!";
+
+    }
 });
 
 

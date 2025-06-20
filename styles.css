@@ -11,8 +11,9 @@ body{
 
 .error-msg{
     color: red;
-    font-size: 10px;
-    padding-left: 78px;
+    font-size: 12px;
+    padding-left: 98px;
+    font-weight: 600;
 }
 
 .heading{
