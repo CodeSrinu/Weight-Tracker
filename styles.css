@@ -1,0 +1,103 @@
+body{
+    margin: 0;
+    padding: 0;
+    background-color: #acee51;
+}
+
+.mian-container{
+    background-color: #acee51;
+    height: 100vh;
+}
+
+.error-msg{
+    color: red;
+    font-size: 10px;
+    padding-left: 78px;
+}
+
+.heading{
+    font-family: "Roboto";
+    font-weight: 700;
+    color: #466521;
+    text-align: center;
+    padding: 20px 0;
+    font-size: 45px;
+}
+
+.button{
+    background-color: #466521;
+    color: #ffffff;
+    font-family: "Roboto";
+    font-weight: 600;
+    border-radius: 10px;
+    border: none;
+    padding: 8px 13px;
+    cursor: pointer;
+}
+
+.button:hover{
+    background-color: #34491e;
+}
+
+.pop-up{
+    background-color: #c0ef25;
+    border-radius: 10px;
+    height: 160px;
+    width: 250px;
+    padding: 15px;
+    position: relative;
+    box-shadow: 0px 4px 40px rgb(45, 77, 8);
+    margin: 20px;
+    margin-top: 230px;
+}
+.pop-up-label{
+    font-size: 20px;
+    font-weight: 600;
+    color: #2f4612;
+    font-family: "Roboto";
+}
+
+
+
+.pop-up-input{
+    border: none;
+    border-radius: 6px;
+    max-width: 120px;
+}
+
+.close-icon{
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-size: 2dvb;
+}
+
+.weight-data-item{
+    background-color: rgb(151, 226, 2);
+    border: none;
+    margin: 20px;
+    padding: 10px;
+    border-radius: 10px;
+    box-shadow: 0 5px 10px rgb(45, 77, 8);
+}
+
+
+.date{
+    color: #1f300b;
+    font-size: 25px;
+    padding-left: 20px;
+}
+
+
+.weight{
+    color: #1f300b;
+    font-size: 40px;
+    padding-left: 20px;
+}
+
+.delete-icon{
+    font-size: 30px;
+    padding-left: auto;
+    margin-left: 30px;
+    cursor: pointer;
+}
