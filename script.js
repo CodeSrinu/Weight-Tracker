@@ -7,6 +7,7 @@ let formEl = document.getElementById('form');
 let closeIconEl = document.getElementById('closeIcon');
 let weightsAndDataContainer = document.getElementById('weightsAndDataContainer');
 let errorMsgEl = document.getElementById('errorMsg');
+let weightLossText = document.getElementById('weightLossText');
 let strigifiedWeightsData = "";
 let weightsData = {};
 
@@ -19,6 +20,7 @@ else{
     weightsData = JSON.parse(localStorage.getItem("weightsData"));
     for(let i of Object.keys(weightsData)){ 
         addWeightsData(i);
+        calculateWeightLoss();
     }
 }
 
@@ -61,6 +63,7 @@ function addWeightsData(dateKey){
         delete weightsData[dateKey];
         saveWeightsDataToStorage();
         weightsAndDataContainer.removeChild(weightDataContainer);
+        calculateWeightLoss();
 
     }
 
@@ -78,7 +81,7 @@ function saveWeight(){
         for(let i of Object.keys(weightsData)){
             addWeightsData(i);
         }
-        
+        calculateWeightLoss();
         weightInputEl.value = "";
         errorMsgEl.textContent = "";
     }
@@ -94,6 +97,7 @@ function addOrRemoveWeightPopUp() {
     mainHeadingEl.classList.toggle('d-none');
     addWeightBtnEl.classList.toggle('d-none');
     weightsAndDataContainer.classList.toggle("d-none");
+    weightLossText.classList.toggle('d-none');
 }
 
 
@@ -107,4 +111,16 @@ formEl.addEventListener('submit', function(event){
 });
 
 
+function calculateWeightLoss(){
+    let date = new Date();
+    let today = date.toLocaleDateString();
+    let yesterday = new Date(date - (86400000)).toLocaleDateString();
+    if(Object.keys(weightsData).includes(yesterday) && Object.keys(weightsData).includes(today)){
+        let weightLost = weightsData[yesterday] - weightsData[today];
+        weightLossText.textContent = `Weight Lost: ${(weightLost).toFixed(3)} Kg`;
+    }
+    else{
+        weightLossText.textContent = `Weight Lost: 0 kg`;
+    }
+}
 

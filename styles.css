@@ -42,8 +42,8 @@ body{
 .pop-up{
     background-color: #c0ef25;
     border-radius: 10px;
-    height: 160px;
-    width: 250px;
+    height: 230px;
+    width: 310px;
     padding: 15px;
     position: relative;
     box-shadow: 0px 4px 40px rgb(45, 77, 8);
@@ -51,7 +51,7 @@ body{
     margin-top: 230px;
 }
 .pop-up-label{
-    font-size: 20px;
+    font-size: 27px;
     font-weight: 600;
     color: #2f4612;
     font-family: "Roboto";
@@ -63,6 +63,7 @@ body{
     border: none;
     border-radius: 6px;
     max-width: 120px;
+    font-size: 22px;
 }
 
 .close-icon{
@@ -75,7 +76,6 @@ body{
 .weight-data-item{
     background-color: rgb(151, 226, 2);
     border: none;
-    margin: 20px;
     padding: 10px;
     border-radius: 10px;
     box-shadow: 0 5px 10px rgb(45, 77, 8);
@@ -100,4 +100,13 @@ body{
     padding-left: auto;
     margin-left: 30px;
     cursor: pointer;
+}
+
+.weight-loss-text{
+    font-family: "Roboto";
+    font-size: 25px;
+    font-weight: 600;
+    color: #2e4415;
+    padding: 20px;
+    text-align: center;
 }
