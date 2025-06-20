@@ -73,8 +73,11 @@ function saveWeight(){
     if(weightInputEl.value !== ""){
         let todayDate = new Date().toLocaleDateString();
         weightsData[todayDate] = weightInputEl.value;
-        saveWeightsDataToStorage(todayDate);
-        addWeightsData(todayDate);
+        saveWeightsDataToStorage();
+        for(let i of Object.keys(weightsData)){
+            addWeightsData(i);
+        }
+        
         weightInputEl.value = "";
         errorMsgEl.textContent = "";
     }
