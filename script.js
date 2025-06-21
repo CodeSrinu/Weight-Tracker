@@ -77,7 +77,6 @@ function addWeightsData(dateKey){
 
 
 function saveWeight(){
-    
         let todayDate = new Date().toLocaleDateString();
         weightsData[todayDate] = weightInputEl.value;
         saveWeightsDataToStorage();
@@ -97,6 +96,7 @@ function addOrRemoveWeightPopUp() {
     addWeightBtnEl.classList.toggle('d-none');
     weightsAndDataContainer.classList.toggle("d-none");
     weightLossText.classList.toggle('d-none');
+    weightInputEl.focus();
 }
 
 
