@@ -1,16 +1,106 @@
+.green-theme {
+  --bg-color: #acee51;
+  --main-heading-color: #3f6415;
+  --button-bg: #466521;
+  --button-hover: #34491e;
+  --button-text: white;
+  --popup-bg: #c0ef25;
+  --card-bg: #98d82e;
+  --error-msg: red;
+  --shadow: rgb(45, 77, 8);
+  --weight-color: #2f4612;
+  --date-color: #1f300b;
+  --loss-text-color: #2e4415;
+}
+
+.blue-theme {
+  --bg-color: #d9e9f9;
+  --main-heading-color: #1a3d6d;
+  --button-bg: #3b8cbf;
+  --button-hover: #2a6799;
+  --button-text: white;
+  --popup-bg: #ffffff;
+  --card-bg: #e0f0ff;
+  --error-msg: darkred;
+  --shadow: rgb(0, 66, 130);
+  --weight-color: #0f2a4b;
+  --date-color: #1a3d6d;
+  --loss-text-color: #163355;
+}
+
+.dark-theme {
+  --bg-color: #1e1e1e;
+  --main-heading-color: #eeeeee;
+  --button-bg: #ffffff;
+  --button-hover: #cccccc;
+  --button-text: #1e1e1e;
+  --popup-bg: #2d2d2d;
+  --card-bg: #3a3a3a;
+  --error-msg: #ff6666;
+  --shadow: rgb(50, 50, 50);
+  --weight-color: #ffffff;
+  --date-color: #bbbbbb;
+  --loss-text-color: #999999;
+}
+
+.pink-theme {
+  --bg-color: #fceef5;
+  --main-heading-color: #6b2e52;
+  --button-bg: #c75b8c;
+  --button-hover: #ad4b79;
+  --button-text: white;
+  --popup-bg: #ffffff;
+  --card-bg: #fff0f8;
+  --error-msg: #d6336c;
+  --shadow: rgb(100, 30, 50);
+  --weight-color: #551a40;
+  --date-color: #6b2e52;
+  --loss-text-color: #7a3d5c;
+}
+
+.orange-theme {
+  --bg-color: #fff3e0;
+  --main-heading-color: #c55911;
+  --button-bg: #f47b20;
+  --button-hover: #db6a16;
+  --button-text: white;
+  --popup-bg: #ffffff;
+  --card-bg: #fff9ec;
+  --error-msg: #cc5500;
+  --shadow: rgb(200, 80, 0);
+  --weight-color: #a8440e;
+  --date-color: #c55911;
+  --loss-text-color: #b34f13;
+}
+
+
+
+
+
+.theme-selecter{
+    color:white;
+    margin-top: 6px;
+    margin-left: 10px;
+    max-width: 18px;
+    max-height: 30px;
+    border: none;
+    border-radius: 10px;
+    background-color: var(--shadow);
+}
+
 body{
     margin: 0;
     padding: 0;
-    background-color: #acee51;
+    background-color: var(--bg-color);
 }
 
 .mian-container{
-    background-color: #acee51;
+    background-color: var(--bg-color);
     height: 100vh;
 }
 
 .error-msg{
-    color: red;
+    color: var(--error-msg);
     font-size: 12px;
     padding-left: 98px;
     font-weight: 600;
@@ -19,15 +109,15 @@ body{
 .heading{
     font-family: "Roboto";
     font-weight: 700;
-    color: #466521;
+    color: var(--main-heading-color);
     text-align: center;
     padding: 20px 0;
     font-size: 42px;
 }
 
 .button{
-    background-color: #466521;
-    color: #ffffff;
+    background-color: var(--button-bg);
+    color: var(--button-text);
     font-family: "Roboto";
     font-weight: 600;
     border-radius: 10px;
@@ -37,24 +127,24 @@ body{
 }
 
 .button:hover{
-    background-color: #34491e;
+    background-color: var(--button-hover);
 }
 
 .pop-up{
-    background-color: #c0ef25;
+    background-color: var(--popup-bg);
     border-radius: 10px;
     height: 230px;
     width: 310px;
     padding: 15px;
     position: relative;
-    box-shadow: 0px 4px 40px rgb(45, 77, 8);
+    box-shadow: 0px 4px 40px var(--shadow);
     margin: 20px;
     margin-top: 230px;
 }
 .pop-up-label{
     font-size: 27px;
     font-weight: 600;
-    color: #2f4612;
+    color: var(--text-color);
     font-family: "Roboto";
 }
 
@@ -75,23 +165,23 @@ body{
 }
 
 .weight-data-item{
-    background-color: rgb(151, 226, 2);
+    background-color: var(--card-bg);
     border: none;
     padding: 10px;
     border-radius: 10px;
-    box-shadow: 0 5px 10px rgb(45, 77, 8);
+    box-shadow: 0 5px 10px var(--shadow);
 }
 
 
 .date{
-    color: #1f300b;
+    color: var(--date-color);
     font-size: 25px;
     padding-left: 20px;
 }
 
 
 .weight{
-    color: #1f300b;
+    color: var(--weight-color);
     font-size: 35px;
     padding-left: 20px;
 }
@@ -107,7 +197,7 @@ body{
     font-family: "Roboto";
     font-size: 25px;
     font-weight: 600;
-    color: #2e4415;
+    color: var(--loss-text-color);
     padding: 20px;
     text-align: center;
 }

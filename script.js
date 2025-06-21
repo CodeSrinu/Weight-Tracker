@@ -10,18 +10,23 @@ let errorMsgEl = document.getElementById('errorMsg');
 let weightLossText = document.getElementById('weightLossText');
 let weightColorEl = document.createElement('weightColor');
 let weightStatus = document.createElement('weightStatus');
+let themeSelecterEl = document.getElementById('themeSelecter');
 
 let strigifiedWeightsData = "";
 let weightsData = {};
 let weightsDataArr = [];
+let theme = "green-theme";
+
 
 
 
 if(localStorage.getItem("weightsData") === "null" || localStorage.getItem("weightsData") === null){
     weightsData = {};
     localStorage.setItem("weightsData", null);
+    localStorage.setItem("theme", "green-theme");
 }
 else{
+    theme = localStorage.getItem("theme");
     weightsData = JSON.parse(localStorage.getItem("weightsData"));
     weightsDataArr = Object.entries(weightsData);
     for(let i = weightsDataArr.length - 1; i >= 0; i--){ 
@@ -29,6 +34,8 @@ else{
         calculateWeightLoss();
     }
 }
+document.body.classList.add(theme);
+
 
 function saveWeightsDataToStorage(){
     strigifiedWeightsData = JSON.stringify(weightsData);
@@ -98,25 +105,10 @@ function addOrRemoveWeightPopUp() {
     addWeightBtnEl.classList.toggle('d-none');
     weightsAndDataContainer.classList.toggle("d-none");
     weightLossText.classList.toggle('d-none');
+    themeSelecterEl.classList.toggle('d-none');
     weightInputEl.focus();
 }
 
-
-addWeightBtnEl.addEventListener('click', addOrRemoveWeightPopUp);
-closeIconEl.addEventListener('click', addOrRemoveWeightPopUp);
-
-formEl.addEventListener('submit', function(event){
-    event.preventDefault();
-    if(weightInputEl.value !== ""){
-        saveWeight();
-        addOrRemoveWeightPopUp();
-        errorMsgEl.textContent = "";
-    }
-    else{
-        errorMsgEl.textContent = "Please enter Weight!";
-
-    }
-});
 
 
 function calculateWeightLoss(){
@@ -144,3 +136,25 @@ function calculateWeightLoss(){
     }
 }
 
+
+addWeightBtnEl.addEventListener('click', addOrRemoveWeightPopUp);
+closeIconEl.addEventListener('click', addOrRemoveWeightPopUp);
+
+formEl.addEventListener('submit', function(event){
+    event.preventDefault();
+    if(weightInputEl.value !== ""){
+        saveWeight();
+        addOrRemoveWeightPopUp();
+        errorMsgEl.textContent = "";
+    }
+    else{
+        errorMsgEl.textContent = "Please enter Weight!";
+
+    }
+});
+
+themeSelecterEl.addEventListener('change', function(event){
+    document.body.classList.remove(document.body.classList);
+    document.body.classList.add(event.target.value);
+    localStorage.setItem("theme", event.target.value);
+});
