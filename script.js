@@ -23,10 +23,9 @@ let theme = "green-theme";
 if(localStorage.getItem("weightsData") === "null" || localStorage.getItem("weightsData") === null){
     weightsData = {};
     localStorage.setItem("weightsData", null);
-    localStorage.setItem("theme", "green-theme");
+    
 }
 else{
-    theme = localStorage.getItem("theme");
     weightsData = JSON.parse(localStorage.getItem("weightsData"));
     weightsDataArr = Object.entries(weightsData);
     for(let i = weightsDataArr.length - 1; i >= 0; i--){ 
@@ -34,6 +33,15 @@ else{
         calculateWeightLoss();
     }
 }
+
+if(localStorage.getItem("theme") === "null" || localStorage.getItem("theme") === null){
+    localStorage.setItem("theme", "green-theme");
+}
+else{
+    theme = localStorage.getItem("theme");
+}
+
+
 document.body.classList.add(theme);
 
 
