@@ -98,6 +98,7 @@ function saveWeight(){
         weightsData[todayDate] = weightInputEl.value;
         saveWeightsDataToStorage();
         weightsAndDataContainer.textContent = "";
+        weightsDataArr = Object.entries(weightsData);
         for(let i = weightsDataArr.length - 1; i >= 0; i--){
             addWeightsData(weightsDataArr[i][0]);
         }
