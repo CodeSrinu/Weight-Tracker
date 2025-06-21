@@ -8,7 +8,9 @@ let closeIconEl = document.getElementById('closeIcon');
 let weightsAndDataContainer = document.getElementById('weightsAndDataContainer');
 let errorMsgEl = document.getElementById('errorMsg');
 let weightLossText = document.getElementById('weightLossText');
-let weightStatus = document.getElementById('weightStatus');
+let weightColorEl = document.createElement('weightColor');
+let weightStatus = document.createElement('weightStatus');
+
 let strigifiedWeightsData = "";
 let weightsData = {};
 let weightsDataArr = [];
@@ -121,16 +123,18 @@ function calculateWeightLoss(){
     let date = new Date();
     let today = date.toLocaleDateString();
     let yesterday = new Date(date - (86400000)).toLocaleDateString();
+    weightLossText.textContent = "";
     if(Object.keys(weightsData).includes(yesterday) && Object.keys(weightsData).includes(today)){
         let weightChange = weightsData[yesterday] - weightsData[today];
-        let weightColorEl = document.getElementById('weightColor');
+        weightLossText.appendChild(weightStatus);
+        weightLossText.appendChild(weightColorEl);
         if(weightChange < 0){
-            weightStatus.textContent = "Gained: ";
+            weightStatus.textContent = "Weight Gained: ";
             weightColorEl.textContent = `${(weightChange * -1).toFixed(3)} Kg`
             weightColorEl.style.color = "Red";
         }
         else{
-            weightStatus.textContent = "Lost: ";
+            weightStatus.textContent = "Weight Lost: ";
             weightColorEl.textContent = `${(weightChange).toFixed(3)} Kg`;
             weightColorEl.style.color = "Green";
         }
