@@ -8,8 +8,11 @@ let closeIconEl = document.getElementById('closeIcon');
 let weightsAndDataContainer = document.getElementById('weightsAndDataContainer');
 let errorMsgEl = document.getElementById('errorMsg');
 let weightLossText = document.getElementById('weightLossText');
+let weightStatus = document.getElementById('weightStatus');
 let strigifiedWeightsData = "";
 let weightsData = {};
+let weightsDataArr = [];
+
 
 
 if(localStorage.getItem("weightsData") === "null" || localStorage.getItem("weightsData") === null){
@@ -18,8 +21,9 @@ if(localStorage.getItem("weightsData") === "null" || localStorage.getItem("weigh
 }
 else{
     weightsData = JSON.parse(localStorage.getItem("weightsData"));
-    for(let i of Object.keys(weightsData)){ 
-        addWeightsData(i);
+    weightsDataArr = Object.entries(weightsData);
+    for(let i = weightsDataArr.length - 1; i >= 0; i--){ 
+        addWeightsData(weightsDataArr[i][0]);
         calculateWeightLoss();
     }
 }
@@ -78,8 +82,8 @@ function saveWeight(){
         weightsData[todayDate] = weightInputEl.value;
         saveWeightsDataToStorage();
         weightsAndDataContainer.textContent = "";
-        for(let i of Object.keys(weightsData)){
-            addWeightsData(i);
+        for(let i = weightsDataArr.length - 1; i >= 0; i--){
+            addWeightsData(weightsDataArr[i][0]);
         }
         calculateWeightLoss();
         weightInputEl.value = "";
@@ -118,8 +122,18 @@ function calculateWeightLoss(){
     let today = date.toLocaleDateString();
     let yesterday = new Date(date - (86400000)).toLocaleDateString();
     if(Object.keys(weightsData).includes(yesterday) && Object.keys(weightsData).includes(today)){
-        let weightLost = weightsData[yesterday] - weightsData[today];
-        weightLossText.textContent = `Weight Lost: ${(weightLost).toFixed(3)} Kg`;
+        let weightChange = weightsData[yesterday] - weightsData[today];
+        let weightColorEl = document.getElementById('weightColor');
+        if(weightChange < 0){
+            weightStatus.textContent = "Gained: ";
+            weightColorEl.textContent = `${(weightChange * -1).toFixed(3)} Kg`
+            weightColorEl.style.color = "Red";
+        }
+        else{
+            weightStatus.textContent = "Lost: ";
+            weightColorEl.textContent = `${(weightChange).toFixed(3)} Kg`;
+            weightColorEl.style.color = "Green";
+        }
     }
     else{
         weightLossText.textContent = `Weight Lost: 0 kg`;
