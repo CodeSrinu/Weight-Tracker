@@ -118,15 +118,26 @@ function addOrRemoveWeightPopUp() {
     weightInputEl.focus();
 }
 
+function findTodayAndpreviousDay(){
+    let date = new Date();
+    let today = date.toLocaleDateString();
+    let previousDay = null;
+    let day = 86400000;
+    while (!Object.keys(weightsData).includes(previousDay)){
+        previousDay = new Date(date - (day)).toLocaleDateString()
+        day += day;
+    }
+    return {today, previousDay};
+
+}
 
 
 function calculateWeightLoss(){
-    let date = new Date();
-    let today = date.toLocaleDateString();
-    let yesterday = new Date(date - (86400000)).toLocaleDateString();
+    let {today, previousDay} = findTodayAndpreviousDay();
+    console.log(today,  previousDay);
     weightLossText.textContent = "";
-    if(Object.keys(weightsData).includes(yesterday) && Object.keys(weightsData).includes(today)){
-        let weightChange = weightsData[yesterday] - weightsData[today];
+    if(Object.keys(weightsData).includes(previousDay) && Object.keys(weightsData).includes(today)){
+        let weightChange = weightsData[previousDay] - weightsData[today];
         weightLossText.appendChild(weightStatus);
         weightLossText.appendChild(weightColorEl);
         if(weightChange < 0){
