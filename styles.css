@@ -146,7 +146,7 @@ body{
 .pop-up-label{
     font-size: 27px;
     font-weight: 600;
-    color: var(--text-color);
+    color: var(--loss-text-color);
     font-family: "Roboto";
 }
 

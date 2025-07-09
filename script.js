@@ -22,7 +22,7 @@ let theme = "green-theme";
 
 if(localStorage.getItem("weightsData") === "null" || localStorage.getItem("weightsData") === null){
     weightsData = {};
-    localStorage.setItem("weightsData", null);
+    localStorage.removeItem("weightsData");
     
 }
 else{
@@ -93,18 +93,18 @@ function addWeightsData(dateKey){
 }
 
 
-function saveWeight(){
-        let todayDate = new Date().toLocaleDateString();
-        weightsData[todayDate] = weightInputEl.value;
-        saveWeightsDataToStorage();
-        weightsAndDataContainer.textContent = "";
-        weightsDataArr = Object.entries(weightsData);
-        for(let i = weightsDataArr.length - 1; i >= 0; i--){
-            addWeightsData(weightsDataArr[i][0]);
-        }
-        calculateWeightLoss();
-        weightInputEl.value = "";
-        errorMsgEl.textContent = "";
+function saveWeight() {
+    let todayDate = new Date().toISOString().split('T')[0];  // Generates 'YYYY-MM-DD'
+    weightsData[todayDate] = weightInputEl.value;
+    saveWeightsDataToStorage();
+    weightsAndDataContainer.innerHTML = "";  // Clear the container
+    weightsDataArr = Object.entries(weightsData);
+    for (let i = weightsDataArr.length - 1; i >= 0; i--) {
+        addWeightsData(weightsDataArr[i][0]);
+    }
+    calculateWeightLoss();
+    weightInputEl.value = "";
+    errorMsgEl.textContent = "";
 }
 
 
@@ -122,37 +122,34 @@ function findTodayAndpreviousDay(){
     let date = new Date();
     let today = date.toLocaleDateString();
     let previousDay = null;
-    let day = 86400000;
+    let dayCount = 1;
     while (!Object.keys(weightsData).includes(previousDay)){
-        previousDay = new Date(date - (day)).toLocaleDateString()
-        day += day;
+        previousDay = new Date(date - (dayCount * 86400000)).toLocaleDateString()
+        dayCount ++;
     }
     return {today, previousDay};
 
 }
 
 
-function calculateWeightLoss(){
-    let {today, previousDay} = findTodayAndpreviousDay();
-    console.log(today,  previousDay);
-    weightLossText.textContent = "";
-    if(Object.keys(weightsData).includes(previousDay) && Object.keys(weightsData).includes(today)){
-        let weightChange = weightsData[previousDay] - weightsData[today];
-        weightLossText.appendChild(weightStatus);
-        weightLossText.appendChild(weightColorEl);
-        if(weightChange < 0){
-            weightStatus.textContent = "Weight Gained: ";
-            weightColorEl.textContent = `${(weightChange * -1).toFixed(3)} Kg`
-            weightColorEl.style.color = "Red";
+function calculateWeightLoss() {
+    let todayStr = new Date().toISOString().split('T')[0];  // 'YYYY-MM-DD'
+    let dates = Object.keys(weightsData).map(dateStr => ({ dateStr, date: new Date(dateStr) }));
+    let previousEntries = dates.filter(entry => entry.date < new Date(todayStr));
+    if (previousEntries.length > 0 && weightsData[todayStr]) {
+        let mostRecent = previousEntries.reduce((prev, current) => (prev.date > current.date ? prev : current));
+        let previousDay = mostRecent.dateStr;
+        let weightChange = weightsData[previousDay] - weightsData[todayStr];
+        if (weightChange < 0) {
+            weightLossText.textContent = `Weight Gained: ${(weightChange * -1).toFixed(3)} Kg`;
+            weightLossText.style.color = "Red";
+        } else {
+            weightLossText.textContent = `Weight Lost: ${weightChange.toFixed(3)} Kg`;
+            weightLossText.style.color = "Green";
         }
-        else{
-            weightStatus.textContent = "Weight Lost: ";
-            weightColorEl.textContent = `${(weightChange).toFixed(3)} Kg`;
-            weightColorEl.style.color = "Green";
-        }
-    }
-    else{
-        weightLossText.textContent = `Weight Lost: 0 kg`;
+    } else {
+        weightLossText.textContent = "Weight Lost: 0 kg";
+        weightLossText.style.color = "Black";
     }
 }
 
@@ -174,7 +171,8 @@ formEl.addEventListener('submit', function(event){
 });
 
 themeSelecterEl.addEventListener('change', function(event){
-    document.body.classList.remove(document.body.classList);
+    // document.body.classList.remove(document.body.classList);
+    document.body.className = "";
     document.body.classList.add(event.target.value);
     localStorage.setItem("theme", event.target.value);
 });
